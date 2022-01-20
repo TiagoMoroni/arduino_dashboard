@@ -1,45 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/6d1229bce0.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap" rel="stylesheet">
     <title>Document</title>
     <style>
-        .info-section{
+        body {
+            padding: 0;
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: none;
+        }
+
+        .info-container {
+            height: 100%;
             display: flex;
+            flex-wrap: wrap;
+            max-width: 100%;
+        }
+
+        .info-section {
+            outline: 1px solid black;
+            width: 30%;
+            min-width: 400px;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+        }
+
+        .droplet-icon {
+            color: rgb(83, 91, 199);
+        }
+        .lightbulb-icon{
+            color: rgb(172, 172, 26);
+        }
+        .termometer-icon{
+            color: rgb(206, 31, 31);
+        }
+        .ruler-icon{
+            color: grey;
+        }
+        .description {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+        }
+        i {
+            font-size: 100px;
         }
     </style>
 </head>
+
 <body>
-    <div class="info-section">
-        <div>Distância: </div>
-        <div id="distancia"></div>
-    </div>
-    <div class="info-section">
-        <div>Luminosidade: </div>
-        <div id="luminosidade"></div>
-    </div>
-    <div class="info-section">
-        <div>Temperatura indoor: </div>
-        <div id="indoor/temperatura"></div>
-    </div>
-    <div class="info-section">
-        <div>Temperatura outdoor: </div>
-        <div id="outdoor/temperatura"></div>
-    </div>
-    <div class="info-section">
-        <div>Umidade indoor: </div>
-        <div id="indoor/umidade"></div>
-    </div>
-    <div class="info-section">
-        <div>Umidade outdoor: </div>
-        <div id="outdoor/umidade"></div>
+    <div class="info-container">
+        <div class="info-section">
+            <i class="fas fa-ruler ruler-icon"></i>
+            <div class="description">Distância </div>
+            <div class="description" id="distancia"></div>
+        </div>
+        <div class="info-section">
+            <i class="fas fa-lightbulb lightbulb-icon"></i>
+            <div class="description">Luminosidade </div>
+            <div class="description" id="luminosidade"></div>
+        </div>
+        <div class="info-section">
+            <i class="fas fa-thermometer-three-quarters termometer-icon"></i>
+            <div class="description">Temperatura indoor </div>
+            <div class="description" id="indoor/temperatura"></div>
+        </div>
+        <div class="info-section">
+            <i class="fas fa-thermometer-three-quarters termometer-icon"></i>
+            <div class="description">Temperatura outdoor </div>
+            <div class="description" id="outdoor/temperatura"></div>
+        </div>
+        <div class="info-section">
+            <i class="fas fa-tint droplet-icon"></i>
+            <div class="description">Umidade indoor </div>
+            <div class="description" id="indoor/umidade"></div>
+        </div>
+        <div class="info-section">
+            <i class="fas fa-tint droplet-icon"></i>
+            <div class="description">Umidade outdoor </div>
+            <div class="description" id="outdoor/umidade"></div>
+        </div>
     </div>
     <script>
         updateInfo()
         setInterval(updateInfo, 3000);
-        async function updateInfo(){
+        async function updateInfo() {
             let data, jsonData
             data = await fetch("https://mqtt-rest.herokuapp.com/distancia")
             jsonData = await data.json()
@@ -52,7 +110,7 @@
             data = await fetch("https://mqtt-rest.herokuapp.com/indoor/temperatura")
             jsonData = await data.json()
             document.getElementById("indoor/temperatura").innerHTML = jsonData
-            
+
             data = await fetch("https://mqtt-rest.herokuapp.com/outdoor/temperatura")
             jsonData = await data.json()
             document.getElementById("outdoor/temperatura").innerHTML = jsonData
@@ -67,4 +125,5 @@
         }
     </script>
 </body>
+
 </html>
