@@ -41,27 +41,27 @@
         setInterval(updateInfo, 3000);
         async function updateInfo(){
             let data, jsonData
-            data = await fetch("http://localhost:3000/distancia")
+            data = await fetch("https://mqtt-rest.herokuapp.com/distancia")
             jsonData = await data.json()
             document.getElementById("distancia").innerHTML = jsonData
 
-            data = await fetch("http://localhost:3000/luminosidade")
+            data = await fetch("https://mqtt-rest.herokuapp.com/luminosidade")
             jsonData = await data.json()
             document.getElementById("luminosidade").innerHTML = jsonData
 
-            data = await fetch("http://localhost:3000/indoor/temperatura")
+            data = await fetch("https://mqtt-rest.herokuapp.com/indoor/temperatura")
             jsonData = await data.json()
             document.getElementById("indoor/temperatura").innerHTML = jsonData
             
-            data = await fetch("http://localhost:3000/outdoor/temperatura")
+            data = await fetch("https://mqtt-rest.herokuapp.com/outdoor/temperatura")
             jsonData = await data.json()
             document.getElementById("outdoor/temperatura").innerHTML = jsonData
 
-            data = await fetch("http://localhost:3000/indoor/umidade")
+            data = await fetch("https://mqtt-rest.herokuapp.com/indoor/umidade")
             jsonData = await data.json()
             document.getElementById("indoor/umidade").innerHTML = jsonData
 
-            data = await fetch("http://localhost:3000/outdoor/umidade")
+            data = await fetch("https://mqtt-rest.herokuapp.com/outdoor/umidade")
             jsonData = await data.json()
             document.getElementById("outdoor/umidade").innerHTML = jsonData
         }
