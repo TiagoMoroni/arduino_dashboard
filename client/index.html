@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .info-section{
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="info-section">
+        <div>Distância: </div>
+        <div id="distancia"></div>
+    </div>
+    <div class="info-section">
+        <div>Luminosidade: </div>
+        <div id="luminosidade"></div>
+    </div>
+    <div class="info-section">
+        <div>Temperatura indoor: </div>
+        <div id="indoor/temperatura"></div>
+    </div>
+    <div class="info-section">
+        <div>Temperatura outdoor: </div>
+        <div id="outdoor/temperatura"></div>
+    </div>
+    <div class="info-section">
+        <div>Umidade indoor: </div>
+        <div id="indoor/umidade"></div>
+    </div>
+    <div class="info-section">
+        <div>Umidade outdoor: </div>
+        <div id="outdoor/umidade"></div>
+    </div>
+    <script>
+        updateInfo()
+        setInterval(updateInfo, 3000);
+        async function updateInfo(){
+            let data, jsonData
+            data = await fetch("http://localhost:3000/distancia")
+            jsonData = await data.json()
+            document.getElementById("distancia").innerHTML = jsonData
+
+            data = await fetch("http://localhost:3000/luminosidade")
+            jsonData = await data.json()
+            document.getElementById("luminosidade").innerHTML = jsonData
+
+            data = await fetch("http://localhost:3000/indoor/temperatura")
+            jsonData = await data.json()
+            document.getElementById("indoor/temperatura").innerHTML = jsonData
+            
+            data = await fetch("http://localhost:3000/outdoor/temperatura")
+            jsonData = await data.json()
+            document.getElementById("outdoor/temperatura").innerHTML = jsonData
+
+            data = await fetch("http://localhost:3000/indoor/umidade")
+            jsonData = await data.json()
+            document.getElementById("indoor/umidade").innerHTML = jsonData
+
+            data = await fetch("http://localhost:3000/outdoor/umidade")
+            jsonData = await data.json()
+            document.getElementById("outdoor/umidade").innerHTML = jsonData
+        }
+    </script>
+</body>
+</html>
